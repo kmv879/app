@@ -29,7 +29,7 @@ jobs:
     - name: Set env TAG
       id: step_tag
       run: echo "TAG=$(echo ${GITHUB_REF:10})" >> $GITHUB_ENV
-      if: startsWith(github.ref, 'refs/tags/v')
+      if: startsWith(github.ref, 'refs/tags/')
       
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:${{ env.TAG }}
@@ -43,7 +43,7 @@ jobs:
   deploy: 
     
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
 
     steps:
